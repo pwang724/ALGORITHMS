@@ -1,96 +1,76 @@
-class ListNode:
-    """
-    A node in a singly-linked list.
-    """
-    def __init__(self, data=None, next=None):
+class Node:
+    data = []
+    nextNode = []
+
+    def __init__(self, data):
         self.data = data
-        self.next = next
-
-    def __repr__(self):
-        return repr(self.data)
+        self.nextNode = None
 
 
-class SinglyLinkedList:
+class LinkedList:
+    head = None
+    tail = None
+
     def __init__(self):
-        """
-        Create a new singly-linked list.
-        Takes O(1) time.
-        """
         self.head = None
 
-    def __repr__(self):
-        """
-        Return a string representation of the list.
-        Takes O(n) time.
-        """
-        nodes = []
-        curr = self.head
-        while curr:
-            nodes.append(repr(curr))
-            curr = curr.next
-        return '[' + ', '.join(nodes) + ']'
+    def push(self, data):
+        a = Node(data)
+        a.nextNode = self.head
+        self.head = a
 
-    def prepend(self, data):
-        """
-        Insert a new element at the beginning of the list.
-        Takes O(1) time.
-        """
-        self.head = ListNode(data=data, next=self.head)
+    def pop(self):
+        temp = self.head
+        self.head = self.head.nextNode
+        return temp
 
     def append(self, data):
-        """
-        Insert a new element at the end of the list.
-        Takes O(n) time.
-        """
-        if not self.head:
-            self.head = ListNode(data=data)
-            return
-        curr = self.head
-        while curr.next:
-            curr = curr.next
-        curr.next = ListNode(data=data)
+        if self.head == None:
+            self.head = Node(data)
+        else:
+            cur = self.head
+            while (cur.nextNode):
+                cur = cur.nextNode
+            cur.nextNode = Node(data)
 
-    def find(self, key):
-        """
-        Search for the first element with `data` matching
-        `key`. Return the element or `None` if not found.
-        Takes O(n) time.
-        """
-        curr = self.head
-        while curr and curr.data != key:
-            curr = curr.next
-        return curr  # Will be None if not found
+    def delete(self, k):
+        if self.head.data == k:
+            self.pop()
+        else:
+            prev = self.head
+            cur = self.head.nextNode
+            while (cur and cur.data != k):
+                prev = cur
+                cur = cur.nextNode
+            prev.next = cur.nextNode
 
-    def remove(self, key):
-        """
-        Remove the first occurrence of `key` in the list.
-        Takes O(n) time.
-        """
-        # Find the element and keep a
-        # reference to the element preceding it
-        curr = self.head
+    def search(self, data):
+        cur = self.head
+        while cur != None and cur.data != data:
+            cur = cur.nextNode
+        return cur
+
+    def reverse(self, data):
         prev = None
-        while curr and curr.data != key:
-            prev = curr
-            curr = curr.next
-        # Unlink it from the list
-        if prev is None:
-            self.head = curr.next
-        elif curr:
-            prev.next = curr.next
-            curr.next = None
+        cur = self.head
+        next = None
 
-    def reverse(self):
-        """
-        Reverse the list in-place.
-        Takes O(n) time.
-        """
-        curr = self.head
-        prev_node = None
-        next_node = None
-        while curr:
-            next_node = curr.next
-            curr.next = prev_node
-            prev_node = curr
-            curr = next_node
-        self.head = prev_node
+        while (cur.nextNode != None):
+            if prev != None:
+                cur.nextNode = prev
+            pre = cur
+            cur = next
+
+
+if __name__ == '__main__':
+    a = LinkedList()
+
+
+
+
+
+
+
+
+
+
