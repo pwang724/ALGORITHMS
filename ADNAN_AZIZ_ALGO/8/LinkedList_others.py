@@ -87,7 +87,6 @@ class SinglyLinkedList:
         """
         curr = self.head
         prev_node = None
-        next_node = None
         while curr:
             next_node = curr.next
             curr.next = prev_node
