@@ -27,15 +27,13 @@ class LinkedList:
             j+= 1
         return '[' + ', '.join(nodes) + ']'
 
-    def cycle(self):
-        a = Node('a')
-        b = Node('b')
-        c = Node('c')
-        d = Node('d')
-        a.nextNode = b
-        b.nextNode = c
-        c.nextNode = d
-        d.nextNode = b
+    def size(self):
+        s = 0
+        cur = self.head
+        while (cur):
+            s+= 1
+            cur = cur.nextNode
+        return s
 
     def push(self, data):
         a = Node(data)
