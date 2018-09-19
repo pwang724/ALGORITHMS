@@ -25,7 +25,7 @@ class Stack:
         if len(self.data):
             return self.data[-1]
         else:
-            return 'empty list'
+            return None
 
 
 
