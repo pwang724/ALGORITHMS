@@ -5,6 +5,7 @@ class Stack:
 
     def __init__(self):
         self.head = None
+        self.data = []
 
     def __repr__(self):
         return repr(list(reversed(self.data)))
