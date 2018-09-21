@@ -3,20 +3,12 @@ from BinaryTree import BinaryTreeNode
 
 def breadth_first_search(first_node):
     q = Queue_List.Queue()
-
-    if first_node:
-        q.enqueue(first_node)
-    else:
-        return 'nothing'
+    q.enqueue(first_node)
 
     out = []
-    while (True):
+    while (q.size()):
         l = []
         temp = Queue_List.Queue()
-
-        if not q.size():
-            return out
-
         while (q.size()):
             node = q.dequeue()
             l.append(node.data)
@@ -27,6 +19,7 @@ def breadth_first_search(first_node):
                 temp.enqueue(node.right)
         out.append(l)
         q = temp
+    return out
 
 if __name__ == '__main__':
     z = BinaryTreeNode(28, None, None)
