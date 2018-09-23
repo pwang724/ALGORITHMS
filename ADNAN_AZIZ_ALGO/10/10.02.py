@@ -17,12 +17,6 @@ def symmetric_tree(node):
     return symmetric(a,b)
 
 if __name__ == '__main__':
-    """ Constructed binary tree is 
-                1 
-              /   \ 
-             2     2 
-           /  \ 
-          3    4   """
 
     a1 = Node(1)
     a2 = Node(2)

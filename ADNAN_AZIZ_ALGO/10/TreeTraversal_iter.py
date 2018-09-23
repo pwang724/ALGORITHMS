@@ -10,54 +10,6 @@ class Node:
         self.parent = None
         self.done = None
 
-def postOrder_parent(root):
-    cur = root
-    while (True):
-        if cur.left and not cur.left.done:
-            cur = cur.left
-        elif cur.right and not cur.right.done:
-            cur = cur.right
-        else:
-            print(cur)
-            cur.done = True
-            if cur.parent:
-                cur = cur.parent
-            else:
-                break
-
-def inOrder_parent(root):
-    cur = root
-    while (True):
-        if cur.left and not cur.left.done:
-            cur = cur.left
-        elif not cur.done:
-            print(cur)
-            cur.done = True
-            if cur.right and not cur.right.done:
-                cur = cur.right
-        else:
-            if cur.parent:
-                cur = cur.parent
-            else:
-                break
-
-def preOrder_parent(root):
-    cur = root
-    while (True):
-        if not cur.done:
-            print(cur)
-            cur.done = True
-        elif cur.done:
-            if cur.left and not cur.left.done:
-                cur = cur.left
-            elif cur.right and not cur.right.done:
-                cur = cur.right
-            else:
-                if cur.parent:
-                    cur = cur.parent
-                else:
-                    break
-
 def inOrder(root):
     cur = root
     s = []
@@ -102,6 +54,54 @@ def postOrder(root):
             justPopped = a
             print(a.data)
 
+def in_order_parent(node):
+    #initiate to left
+    while node.left:
+        node = node.left
+    while node:
+        print(node)
+        if node.right:
+            node = node.right
+            while node.left:
+                node = node.left
+        else:
+            while node.parent and node.parent.right is node:
+                node = node.parent
+            node = node.parent
+
+def post_order_parent(node):
+    #initiate to left
+    while node.left:
+        node = node.left
+    while node:
+        print(node)
+        if node.parent and node.parent.right and node.parent.right is not node:
+            node = node.parent.right
+            while node.left or node.right:
+                if node.left:
+                    node = node.left
+                else:
+                    node = node.right
+        else:
+            node = node.parent
+
+def pre_order_parent(node):
+    while node:
+        print(node)
+        if node.left:
+            node = node.left
+        elif node.right:
+            node = node.right
+        else:
+            while (node.parent):
+                if (node.parent.right is None) or (node.parent.right is node):
+                    node = node.parent
+                else:
+                    break
+            if node.parent:
+                node = node.parent.right
+            else:
+                node = None
 
 
 # Driver program to test above function
@@ -118,6 +118,7 @@ a2 = Node(2)
 a3 = Node(3)
 a4 = Node(4)
 a5 = Node(5)
+a6 = Node(6)
 
 a1.parent = None
 a1.left = a2
@@ -128,7 +129,9 @@ a2.right = a5
 a4.parent = a2
 a5.parent = a2
 a3.parent = a1
+a6.parent = a5
+a5.right = a6
 
-preOrder_parent(a1)
+pre_order_parent(a1)
 
 # This code is contributed by Nikhil Kumar Singh(nickzuck_007)
