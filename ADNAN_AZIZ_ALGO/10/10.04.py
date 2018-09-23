@@ -1,38 +1,36 @@
 from Node import Node
 
-def LCA(node, a, b):
-    def helper(node, a):
-        l = []
-        while (node.left):
-            node = node.left
-
+def LCA(a, b):
+    def height(node):
+        i = 0
         while (node):
-            if a == node.data:
-                while (node):
-                    l.append(node.data)
-                    node = node.parent
-                return l
-            if node.parent and node.parent.right and node.parent.right is not node:
-                node = node.parent.right
-                while (node.left or node.right):
-                    if node.left:
-                        node = node.left
-                    else:
-                        node = node.right
-            else:
-                node = node.parent
-    l1 = helper(node, a)
-    l2 = helper(node, b)
-    diff = len(l2) - len(l1)
-    if diff > 0:
-        l2 = l2[diff:]
-    else:
-        l1 = l1[-diff:]
+            node = node.parent
+            i+= 1
+        return i
 
-    for a, b in zip(l1, l2):
-        if a == b:
+    def move_up(node, n):
+        for i in range(n):
+            node = node.parent
+        return node
+
+    h_a = height(a)
+    h_b = height(b)
+    diff = h_a - h_b
+    if diff > 0:
+        a = move_up(a, diff)
+    else:
+        b = move_up(b, -diff)
+
+    for i in range(min(h_a, h_b)):
+        if a is b:
             return a
+        else:
+            a = a.parent
+            b = b.parent
     return None
+
+
+
 
 
 if __name__ == '__main__':
@@ -59,4 +57,4 @@ if __name__ == '__main__':
     a5.parent = a2
     a3.parent = a1
 
-    print(LCA(a1, 4, 3))
+    print(LCA(a2, a5))
