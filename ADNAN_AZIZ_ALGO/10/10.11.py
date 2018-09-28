@@ -1,19 +1,19 @@
 from Node import Node
 
-def inorder_successor(node):
-    if node.right:
-        node = node.right
-        while node.left:
-            node = node.left
-        return node
-    else:
-        if not node.parent:
-            return node
+def inorder_parent(node):
+    while (node.left):
+        node = node.left
+
+    while (node):
+        print(node)
+        if node.right:
+            node = node.right
+            while node.left:
+                node = node.left
         else:
             while node.parent and node is node.parent.right:
                 node = node.parent
-            return node.parent
-
+            node = node.parent
 
 
 
@@ -38,12 +38,13 @@ if __name__ == '__main__':
     a7 = Node(7)
     a8 = Node(8)
 
-    a1.parent = None
     a1.left = a2
     a1.right = a3
-    a2.parent = a1
     a2.left = a4
     a2.right = a5
+
+    a1.parent = None
+    a2.parent = a1
     a4.parent = a2
     a5.parent = a2
     a3.parent = a1
@@ -59,4 +60,4 @@ if __name__ == '__main__':
     a6.left = a7
     a6.right = a8
 
-    print(inorder_successor(a3))
+    print(inorder_parent(a1))
