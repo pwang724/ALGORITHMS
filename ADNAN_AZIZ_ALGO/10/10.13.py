@@ -25,9 +25,6 @@ def reconstruct_preorder(preorder):
     subtree_key = preorder.pop(0)
     if subtree_key is None:
         return None
-
-    # Note that reconstruct_preorder_helper updates preorder_iter. So the
-    # order of following two calls are critical.
     left_subtree = reconstruct_preorder(preorder)
     right_subtree = reconstruct_preorder(preorder)
     return Node(subtree_key, left_subtree, right_subtree)
