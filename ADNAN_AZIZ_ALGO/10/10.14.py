@@ -2,7 +2,6 @@ from Node import Node
 from LinkedList import LinkedList
 import TreeTraversal_iter
 
-
 def makeLL(node):
     a = LinkedList()
 
