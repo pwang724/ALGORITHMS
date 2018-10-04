@@ -1,52 +1,68 @@
+import TreeTraversal_iter
+
 class Node:
     def __init__(self, data = None, left = None, right = None):
         self.data = data
         self.left = left
         self.right = right
-        self.level_next = None
+        self.parent = None
+        self.locked = False
+        self.num_de_locked = 0
 
     def __repr__(self):
         return repr(self.data)
 
-def set_level_next(node):
-    if node:
-        if node.left and node.right:
-            node.left.level_next = node.right
-            if node.level_next:
-                node.right.level_next = node.level_next.left
+def is_locked(node):
+    return node.locked
 
-        set_level_next(node.left)
-        set_level_next(node.right)
+def lock(node):
+    if node.locked:
+        return 'already locked'
+    else:
+        descendants_locked = node.num_de_locked > 0
+        parents_locked = False
+        cur = node
+        while (not parents_locked and cur):
+            parents_locked = cur.locked
+            cur = cur.parent
 
-def level_next_print(node):
-    if node:
-        print([node.data, node.level_next])
-        level_next_print(node.left)
-        level_next_print(node.right)
+        if not (descendants_locked or parents_locked):
+            node.locked = True
+            cur = node
+            while (cur):
+                cur.num_de_locked += 1
+                cur = cur.parent
+            return True
+        else:
+            return False
 
+def unlock(node):
+    if not node.locked:
+        return
+    else:
+        node.locked = False
+        cur = node
+        while (cur):
+            cur.num_de_locked -= 1
+            cur = cur.parent
 
 if __name__ == '__main__':
-    # """ Constructed binary tree is
-    #             1
-    #           /   \
-    #          2     3
-    #        /  \   / \
-    #       4    5 6   7
+    p = Node('p', None, None)
+    o = Node('o', None, p)
+    n = Node('n')
+    m = Node('m')
+    l = Node('l', None, m)
+    k = Node('k', l, n)
+    j = Node('j', None, k)
+    i = Node('i', j, o)
 
-    a1 = Node(1)
-    a2 = Node(2)
-    a3 = Node(3)
-    a4 = Node(4)
-    a5 = Node(5)
-    a6 = Node(6)
-    a7 = Node(7)
+    h = Node('h')
+    g = Node('g', h)
+    f = Node('f', None, g)
+    e = Node('e')
+    d = Node('d')
+    c = Node('c', d, e)
+    b = Node('b', c, f)
+    a = Node('a', b, i)
 
-    a1.left = a2
-    a1.right = a3
-    a2.left = a4
-    a2.right = a5
-    a3.left = a6
-    a3.right = a7
-
-    set_level_next(a1)
-    level_next_print(a1)
+    print(TreeTraversal_iter.preOrder(a))
