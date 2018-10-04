@@ -7,6 +7,7 @@ class Node:
     def __repr__(self):
         return repr(self.data)
 
+
 if __name__ == "__main__":
     a = Node()
     print(a.data)
