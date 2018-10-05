@@ -5,41 +5,72 @@ def median_online(l):
     min_heap = []
     max_heap = []
     result = []
-    median = 0
-    even = 1
+    max_over_min = 0
 
-    #init
-    a = next(list_iter)
-    b = next(list_iter)
-    if a >=b:
-        min_heap.append(a)
-        max_heap.append(-b)
-    else:
-        min_heap.append(b)
-        max_heap.append(-a)
-    result.append(a)
-    result.append((a+b)/2)
+    n = next(list_iter)
+    result.append(n)
+    max_heap.append(-n)
+    max_over_min += 1
 
-    while (True):
-        num = next(list_iter, None)
-        if num is None:
-            return
-
-        if num >= result[-1]:
-            median = heapq.heappushpop(min_heap, num)
-            heapq.heappush(max_heap, -median)
+    cur = next(list_iter, None)
+    while (cur is not None):
+        if cur >= result[-1]:
+            heapq.heappush(min_heap, cur)
+            max_over_min -= 1
         else:
-            median = -1 * heapq.heappushpop(max_heap, -num)
-            heapq.heappush(min_heap, median)
+            heapq.heappush(max_heap, -cur)
+            max_over_min += 1
 
-        result.append(median)
+        if abs(max_over_min) == 2:
+            if max_over_min > 0:
+                temp = - heapq.heappop(max_heap)
+                heapq.heappush(min_heap,temp)
+            else:
+                temp = heapq.heappop(min_heap)
+                heapq.heappush(max_heap, - temp)
+            max_over_min = 0
 
+        #odd trials
+        if max_over_min % 2:
+            if max_over_min == 1:
+                result.append(-1.0 * max_heap[0])
+            else:
+                result.append(1.0 * min_heap[0])
+        #even trials
+        else:
+            mean = (min_heap[0] - max_heap[0]) / 2.0
+            result.append(mean)
+        cur = next(list_iter, None)
+    return result
 
-    return
+def median_online_better(sequence):
+    sequence = iter(sequence)
+    min_heap = []
+    max_heap = []
+    result = []
+
+    #have to have first element
+    a = next(sequence)
+    min_heap.append(a)
+    result.append(a)
+    for x in sequence:
+        if x >= result[-1]:
+            heapq.heappush(min_heap, x)
+        else:
+            heapq.heappush(max_heap,-x)
+
+        if len(max_heap) > len(min_heap):
+            heapq.heappush(min_heap, - heapq.heappop(max_heap))
+        elif len(min_heap) > (len(max_heap) + 1):
+            heapq.heappush(max_heap, - heapq.heappop(min_heap))
+
+        if len(max_heap) == len(min_heap):
+            result.append((min_heap[0] - max_heap[0]) / 2.0)
+        else:
+            result.append(1.0 * min_heap[0])
+    return result
 
 if __name__ == '__main__':
-    #assume sorted in increasing order
-    a = [(1,0,0),(1,2,3),(2,3,4),(3,4,5),(1,1,1),(2,2,2)]
-    print(median_online([1, 0, 3, 5, 2, 0, 1]))
+    print(median_online_better([1, 0, 3, 5, 2, 0, 1]))
 
     # 1, .5, 1, 2, 2, 1.5, 1
