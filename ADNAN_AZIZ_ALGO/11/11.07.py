@@ -50,7 +50,7 @@ class stack1(comparison):
 
 
 
-if __name__ is '__main__':
+if __name__ == '__main__':
     a = stack1(['a','b','c','d'])
     a.push('e')
 
