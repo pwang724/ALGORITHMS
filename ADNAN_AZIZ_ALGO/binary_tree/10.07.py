@@ -25,7 +25,7 @@ if __name__ == '__main__':
     #             \
     #              6
     #             / \
-    #            7   8"""
+    #            7   linked_list"""
 
     a1 = Node(1)
     a2 = Node(2)

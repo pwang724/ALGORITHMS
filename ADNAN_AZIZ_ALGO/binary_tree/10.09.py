@@ -17,7 +17,7 @@ def inorder_k(node, k):
 
 if __name__ == '__main__':
     # """ Constructed binary tree is
-    #             8
+    #             linked_list
     #           /   \
     #          6     1
     #        /  \
@@ -44,4 +44,4 @@ if __name__ == '__main__':
     a6.left = a7
     a6.right = a8
 
-    print(inorder_k(a1, 7))
+    print(inorder_k(a1, 3))

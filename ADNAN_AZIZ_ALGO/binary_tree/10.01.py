@@ -1,4 +1,4 @@
-from Node import Node
+from binary_tree.Node import Node
 
 def height_balanced(node):
     def height(node):

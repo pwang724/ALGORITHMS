@@ -23,6 +23,18 @@ def contains_sum(node, val):
                     return new_tup
     return helper(node, (0, False), val)
 
+
+def contains_sum_(node, cur_sum):
+        if node is None:
+            return False
+        cur_sum = cur_sum - node.data
+        if node.left == None and node.right == None:
+            return cur_sum == 0
+        elif cur_sum > 0:
+            return contains_sum_(node.left, cur_sum) or contains_sum_(node.right, cur_sum)
+        else:
+            return False
+
 if __name__ == '__main__':
     # """ Constructed binary tree is
     #             1
@@ -33,7 +45,7 @@ if __name__ == '__main__':
     #             \
     #              6
     #             / \
-    #            7   8"""
+    #            7   linked_list"""
 
     a1 = Node(1)
     a2 = Node(2)
@@ -62,5 +74,5 @@ if __name__ == '__main__':
     a5.parent = a2
     a3.parent = a1
 
-    print(contains_sum(a1, 8))
+    print(contains_sum_(a1, 4))
 

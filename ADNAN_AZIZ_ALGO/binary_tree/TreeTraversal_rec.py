@@ -1,11 +1,11 @@
-from Node import Node
+from binary_tree.Node import Node
 
 def TreeTraversal(node):
     # pre order
-    if node:
-        print(node.data)
-        TreeTraversal(node.left)
-        TreeTraversal(node.right)
+    # if node:
+    #     print(node.data)
+    #     TreeTraversal(node.left)
+    #     TreeTraversal(node.right)
 
     # # in order
     # if node:
@@ -13,11 +13,11 @@ def TreeTraversal(node):
     #     print(node.data)
     #     TreeTraversal(node.right)
 
-    # #post order
-    # if node:
-    #     TreeTraversal(node.left)
-    #     TreeTraversal(node.right)
-    #     print(node.data)
+    #post order
+    if node:
+        TreeTraversal(node.left)
+        TreeTraversal(node.right)
+        print(node.data)
 
 
 if __name__ == '__main__':
@@ -39,4 +39,4 @@ if __name__ == '__main__':
     b = Node('b', c, f)
     a = Node('a', b, i)
 
-    pre_order(a)
+    TreeTraversal(a)

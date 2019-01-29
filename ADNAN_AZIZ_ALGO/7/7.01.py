@@ -1,5 +1,5 @@
 def str2int(str):
-    dict = {'0':0, '1':1,'2':2,'3':3,'4':4,'5':5,'6':6,'7':7,'8':8,'9':9}
+    dict = {'0':0, '1':1,'2':2,'3':3,'4':4,'5':5,'6':6,'7':7,'linked_list':8,'stack_and_queue':9}
 
     if str[0] == '-':
         start = 1
@@ -17,7 +17,7 @@ def str2int(str):
     return sign * out
 
 def int2str(num):
-    dict = {'0': 0, '1': 1, '2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7, '8': 8, '9': 9}
+    dict = {'0': 0, '1': 1, '2': 2, '3': 3, '4': 4, '5': 5, '6': 6, '7': 7, 'linked_list': 8, 'stack_and_queue': 9}
     invdict = {v: k for k, v in dict.iteritems()}
 
     if num < 0:

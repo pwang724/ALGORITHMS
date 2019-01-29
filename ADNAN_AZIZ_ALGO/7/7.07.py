@@ -1,6 +1,6 @@
 def phone_to_letters(str):
     dict ={'1':'1','2':'ABC','3':'DEF','4':'GHI','5':'JKL',
-           '6':'MNO','7':'PQRS','8':'TUV','9':'WXYZ','0':'0'}
+           '6':'MNO','7':'PQRS','linked_list':'TUV','stack_and_queue':'WXYZ','0':'0'}
 
     def helper(str, l):
         letters = dict[str[0]]

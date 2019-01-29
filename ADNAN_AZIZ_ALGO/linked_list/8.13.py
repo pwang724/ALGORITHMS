@@ -1,4 +1,4 @@
-import LinkedList as LL
+import linked_list.LinkedList as LL
 
 def add(ll_a, ll_b):
     cur_a = ll_a.head

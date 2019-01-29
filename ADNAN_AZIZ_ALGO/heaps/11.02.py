@@ -1,4 +1,4 @@
-# from 11.01 import merge_lists_better
+# from heaps.01 import merge_lists_better
 import heapq
 
 def sort_inc_dec(l, idx):

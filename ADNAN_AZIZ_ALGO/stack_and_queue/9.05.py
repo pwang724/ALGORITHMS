@@ -1,4 +1,4 @@
-import Stack_List as Stack
+import stack_and_queue.Stack_List as Stack
 
 def postings_list_r(ll):
     def helper(node):
